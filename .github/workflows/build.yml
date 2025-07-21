@@ -1,28 +1,21 @@
-name: C++ CI
+# File: .github/workflows/build.yml
+name: CMake Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake g++
-
-    - name: Create build directory
-      run: mkdir -p build
-
-    - name: Run CMake
-      run: |
-        cd build
-        cmake ..
-        make
+      - uses: actions/checkout@v3
+      - name: Create Build Directory
+        run: mkdir -p build
+      - name: Run CMake and Make
+        run: |
+          cd build
+          cmake ..
+          make
